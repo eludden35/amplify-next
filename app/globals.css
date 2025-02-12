@@ -1,62 +1,82 @@
+@import "tailwindcss";
+
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: #CBBEFF;
-  --background-end-rgb: 255, 255, 255;
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: #6649AE;
-  --card-border-rgb: 131, 134, 135;
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  min-height: 100vh;
+}
 
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 10px));
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.animate-float {
+  animation: float 20s ease-in-out infinite;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@media (max-width: 640px) {
+  .animate-float {
+    animation: none;
+  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
+.bg-hero-gradient {
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to bottom,
+    #1c376f 0%,
+    #2a4d8f 20%,
+    #3a6fc7 40%,
+    #2a4d8f 60%,
+    #1c376f 80%,
+    #000000 95%,
+    #000000 100%
+  );
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Logo shine effect */
+.logo-shine {
+  position: relative;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.logo-shine::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-150%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(45deg);
   }
 }
+

@@ -15,8 +15,6 @@ const client = generateClient<Schema>();
 export default function TodosPage() {
     const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
-  const { signOut } = useAuthenticator();
-
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
@@ -40,7 +38,7 @@ export default function TodosPage() {
 
   return (
     <main>
-      <button onClick={signOut}>Sign out</button>
+      <button>Sign out</button>
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
